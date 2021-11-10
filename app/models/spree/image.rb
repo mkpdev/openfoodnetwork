@@ -13,7 +13,7 @@ module Spree
     # - product: used in the BackOffice: Product Image upload modal in the Bulk Product Edit page
     #                                      and Product image edit page
     # - large: used in the FrontOffice: product modal
-    has_attached_file :attachment,
+    has_one_attached :attachment,
                       styles: { mini: "48x48#", small: "227x227#",
                                 product: "240x240>", large: "600x600>" },
                       default_style: :product,
@@ -30,7 +30,7 @@ module Spree
 
     # used by admin products autocomplete
     def mini_url
-      attachment.url(:mini, false)
+      url_for(attachment.variant(resize: "48x48#"))
     end
 
     def find_dimensions
